@@ -58,4 +58,29 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+
+    /**
+     * Get the type of user that have the Current User
+     *
+     * Define the relationship one-to-one between the tables users and type_users
+     *
+     * @return TypeUser
+     **/
+    public function type()
+    {
+        return $this->hasOne(TypeUser::class, 'type_user_id', 'id');
+    }
+    
+    /**
+     * Get the person related to the user
+     *
+     * Define the relationship between one-to-one between the tables people and users, returns the person related to the user
+     *
+     * @return type
+     **/
+    public function FunctionName()
+    {
+        return $this->hasOne(Person::class, 'person_id', 'id');
+    }
 }
