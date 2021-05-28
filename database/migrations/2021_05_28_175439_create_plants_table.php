@@ -1,0 +1,39 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+class CreatePlantsTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('plants', function (Blueprint $table) {
+            $table->id();
+
+            $table->tinyText('short_description');
+            $table->text('description')->nullable();
+            $table->unsignedBigInteger('price');
+            $table->unsignedBigInteger('stock');
+            
+            $table->foreignId('plant_specie_id')->constrained('plant_species');
+
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('plants');
+    }
+}
