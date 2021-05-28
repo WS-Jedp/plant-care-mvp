@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PersonController;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -22,12 +23,7 @@ Route::get('/', function () {
 });
 
 
-Route::get('/hello/{who}', function (Request $request, string $who){
-    $session_token = csrf_token();
-
-    return Inertia::render('Hello', ['who' => $who, "token" => $session_token]);
-
-});
+Route::resource('person', PersonController::class);
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
